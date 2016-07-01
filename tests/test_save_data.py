@@ -4,12 +4,10 @@
 import unittest
 
 from bds.datasaveservice import DataSaveServiceMongo
-from bds.exceptions import DataSaveServiceWrongArgumentsError
+from bds import exceptions
 
 
 class TestSaveData(unittest.TestCase):
-
-    # TODO mongodb control exceptions
 
     def setUp(self):
         self.mongodb = DataSaveServiceMongo(host='127.0.0.1', port=27017, database='bdirdata')
@@ -29,18 +27,18 @@ class TestSaveData(unittest.TestCase):
         self.mongodb.save_data(self.collection, self.test_data)
 
     def test_check_arguments_connection(self):
-        with self.assertRaises(DataSaveServiceWrongArgumentsError):
+        with self.assertRaises(exceptions.DataSaveServiceWrongArgumentsError):
             self.mongodb._check_args()
 
     def test_check_arguments_connection_wrong_arguments(self):
-        with self.assertRaises(DataSaveServiceWrongArgumentsError):
+        with self.assertRaises(exceptions.DataSaveServiceWrongArgumentsError):
             arguments = {
                 'hello': 'hello'
             }
             self.mongodb._check_args(**arguments)
 
     def test_check_arguments_connection_few_arguments(self):
-        with self.assertRaises(DataSaveServiceWrongArgumentsError):
+        with self.assertRaises(exceptions.DataSaveServiceWrongArgumentsError):
             arguments = {
                 'port': 12345,
                 'database': 'hello'
@@ -62,6 +60,11 @@ class TestSaveData(unittest.TestCase):
         self.mongodb.save_data(self.collection, self.test_data)
 
         self.assertTrue(self.mongodb.delete_all(self.collection) == 2)
+
+    def test_data_service_raise_error(self):
+        with self.assertRaises(exceptions.DataSaveServiceError):
+            self.mongodb.save_data(self.collection, self.test_data)
+            self.mongodb.save_data(self.collection, self.test_data)
 
 
 if __name__ == '__main__':

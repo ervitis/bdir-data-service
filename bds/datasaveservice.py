@@ -4,6 +4,7 @@
 import logging
 
 from pymongo import MongoClient
+from pymongo import errors
 
 from . import exceptions
 
@@ -32,7 +33,10 @@ class DataSaveServiceMongo(DataSaveServiceInterface):
     def save_data(self, collection, data):
         assert isinstance(data, dict)
 
-        self._connector[collection].insert_one(data)
+        try:
+            self._connector[collection].insert_one(data)
+        except errors.DuplicateKeyError as e:
+            raise exceptions.DataSaveServiceError('Error {}'.format(e))
 
     def delete_data(self, collection, data):
         assert isinstance(data, dict)
