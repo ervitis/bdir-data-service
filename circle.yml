@@ -1,3 +1,7 @@
 machine:
   python:
     version: 3.5.1
+
+dependencies:
+  override:
+    - sudo apt-get update && sudo apt-get install -y mongodb mongodb-server && sudo service mongod restart

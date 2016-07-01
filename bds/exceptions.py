@@ -7,13 +7,9 @@ import logging
 class DataLoadersError(Exception):
     __logger = logging.basicConfig()
 
-    def __init__(self, message):
+    def __init__(self, message, *args, **kwargs):
         self.message = message
-        super(Exception, self).__init__(self.message)
-
-    def __str__(self):
-        self.__logger.log(msg=self.message, level=logging.ERROR)
-        print(self.message)
+        super(Exception, self).__init__(self.message, args, kwargs)
 
 
 class DataLoaderFileError(DataLoadersError):
@@ -25,4 +21,8 @@ class DataLoaderCSVReaderError(DataLoadersError):
 
 
 class DataLoaderKeyError(DataLoadersError):
+    pass
+
+
+class DataSaveServiceWrongArgumentsError(DataLoadersError):
     pass

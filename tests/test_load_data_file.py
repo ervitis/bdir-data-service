@@ -45,4 +45,4 @@ class TestLoadDataFile(unittest.TestCase):
             self.assertTrue(isinstance(data, dict))
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)

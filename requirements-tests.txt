@@ -1,2 +1,3 @@
 nose
 coverage
+mongomock==3.4.0
