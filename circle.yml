@@ -4,4 +4,4 @@ machine:
 
 dependencies:
   override:
-    - sudo apt-get update && sudo apt-get install -y mongodb mongodb-server && sudo service mongod restart
+    - sudo apt-get update && sudo apt-get install -y mongodb mongodb-server && sudo mkdir -p /data/db
