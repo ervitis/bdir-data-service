@@ -23,7 +23,7 @@ class TestArgumentParser(unittest.TestCase):
     def test_parser(self):
         self.arguments['short'] = '-c'
         self.arguments['long'] = '--collection'
-        self.argparser.parse_build(self.arguments)
+        self.argparser.parse_build(self.arguments['short'], self.arguments['long'])
 
         self.assertTrue(self.argparser.parser.parse_args(['-c', 'collection']))
         self.assertTrue(self.argparser.parser.parse_args(['--collection', 'test']))
@@ -32,7 +32,7 @@ class TestArgumentParser(unittest.TestCase):
         self.arguments['short'] = '-d'
         self.arguments['long'] = '--delimeter'
         self.arguments['dest'] = 'delimeter'
-        self.argparser.parse_build(argument=self.arguments, dest=self.arguments['dest'])
+        self.argparser.parse_build(self.arguments['short'], self.arguments['long'], dest=self.arguments['dest'])
 
         args = self.argparser.parser.parse_args(['-d', ';'])
         self.assertIsNotNone(args.delimeter)

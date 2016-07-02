@@ -8,8 +8,8 @@ class DataServiceArgumentParser(object):
     def __init__(self):
         self._parser = ArgumentParser()
 
-    def parse_build(self, argument, **kwargs):
-        self._parser.add_argument(argument['short'], argument['long'], **kwargs)
+    def parse_build(self, short, long, **kwargs):
+        self._parser.add_argument(short, long, **kwargs)
 
         return self
 
